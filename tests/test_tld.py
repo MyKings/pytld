@@ -1,10 +1,6 @@
-# pytld
+#!/usr/bin/env python
+# coding: utf-8
 
-Imitate an extension of tld
-
-# USAGE
-
-```python
 from pytld import get_tld
 from pytld import get_full_domain
 from pytld import get_hostname
@@ -27,4 +23,3 @@ def test_get_full_domain():
 
 def test_get_hostname():
     assert get_hostname('http://www.example.com.cn:8080/admin.php/afaf?13123') == 'www'
-```
