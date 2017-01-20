@@ -1,8 +1,16 @@
 # pytld
 
-Imitate an extension of tld
+Refer to `http://mxr.mozilla.org/mozilla/source/netwerk/dns/src/effective_tld_names.dat?raw=1`. The top-level domain analysis of the URL or domain name.
 
-# USAGE
+## Installation
+
+```bash
+$ pip install pytld
+```
+
+## Usage example
+
+It can be from the URL or domain name analysis top-level domain:
 
 ```python
 from pytld import get_tld
@@ -27,4 +35,17 @@ def test_get_full_domain():
 
 def test_get_hostname():
     assert get_hostname('http://www.example.com.cn:8080/admin.php/afaf?13123') == 'www'
+
 ```
+
+## License
+
+MPL 1.1/GPL 2.0/LGPL 2.1
+
+## Support
+
+For any issues contact me at the e-mail given in the `Author` section.
+
+## Author
+
+mykings <xsseroot@gmail.com>
