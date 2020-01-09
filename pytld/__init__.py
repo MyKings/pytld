@@ -16,15 +16,6 @@ __all__ = [
 
 domains_tlds = []
 
-def ip_check(domain):
-    """
-    :return:
-    """
-    q = domain.split('.')
-    return len(q) == 4 and len(filter(lambda x: x >= 0 and x <= 255, \
-                                      map(int, filter(lambda x: x.isdigit(), q)))) == 4
-
-
 def get_fld(domain_or_url, strict=True):
     """
 
@@ -64,7 +55,7 @@ def get_hostname(domain_or_url):
     :param domain_or_url:
     :return:
     """
-    _tld_name = get_tld(domain_or_url)
+    _tld_name = get_fld(domain_or_url)
     _full_domain_name = get_full_domain(domain_or_url)
     result = None
     if _tld_name and _full_domain_name:
@@ -97,9 +88,6 @@ def _fld_by_domain(domain, strict):
     :return:
     """
     result = ''
-
-    if ip_check(domain):
-        return domain
 
     if domain.endswith('.'):
         domain = domain[:-1]

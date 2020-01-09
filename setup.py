@@ -15,7 +15,7 @@ def read(fname):
 
 setup(
     name='pytld',
-    version='0.2.0',
+    version='0.2.1',
     description='Tld is obtained by url or full domain name',
     long_description=read('README'),
     author='MyKings',
@@ -42,9 +42,4 @@ setup(
             "pytld = pytld.cli:main"
         ]
     },
-    extras_require={
-        'test': [
-            'pytest'
-        ],
-    }
 )

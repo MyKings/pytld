@@ -16,7 +16,7 @@ assert get_fld('mail.google.com.hk') == 'google.com.hk'
 assert get_fld('apps.google.com.hk.') == 'google.com.hk'
 assert get_fld('blog.google.hk.') == 'google.hk'
 
-
+assert get_fld("*.test.com.cn") == "test.com.cn"
 
 assert get_full_domain('http://www.example.com.cn:8080/admin.php/afaf?13123') == 'www.example.com.cn'
 assert get_hostname('http://www.example.com.cn:8080/admin.php/afaf?13123') == 'www'
