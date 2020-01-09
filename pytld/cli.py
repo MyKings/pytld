@@ -4,7 +4,7 @@
 
 import sys
 
-from pytld import get_tld
+from pytld import get_fld
 
 
 def main():
@@ -13,7 +13,7 @@ def main():
     else:
         url_or_domain = 'http://www.example.com'
 
-    print(get_tld(url_or_domain))
+    print(get_fld(url_or_domain))
 
 if __name__ == '__main__':
     main()

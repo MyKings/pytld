@@ -4,17 +4,28 @@
 
 import os
 
-import urlparse
+try:
+    import urlparse
+except ImportError:
+    import urllib.parse as urlparse
 
 
 __all__ = [
-    'get_tld', 'get_hostname', 'get_full_domain'
+    'get_fld', 'get_hostname', 'get_full_domain'
 ]
 
 domains_tlds = []
 
+def ip_check(domain):
+    """
+    :return:
+    """
+    q = domain.split('.')
+    return len(q) == 4 and len(filter(lambda x: x >= 0 and x <= 255, \
+                                      map(int, filter(lambda x: x.isdigit(), q)))) == 4
 
-def get_tld(domain_or_url, strict=True):
+
+def get_fld(domain_or_url, strict=True):
     """
 
     :param domain_or_url:
@@ -27,10 +38,10 @@ def get_tld(domain_or_url, strict=True):
     result = ''
     if domain_or_url:
         domain = str(domain_or_url).lower()
-        if domain.startswith('http://'):
-            result = _tld_by_url(domain, strict)
+        if domain.startswith('http'):
+            result = _fld_by_url(domain, strict)
         else:
-            result = _tld_by_domain(domain, strict)
+            result = _fld_by_domain(domain, strict)
 
     return result
 
@@ -42,7 +53,7 @@ def get_full_domain(url):
     :return:
     """
     result = url
-    if result.startswith('http://'):
+    if result.startswith('http'):
         result = urlparse.urlparse(url).netloc.split(':', 1)[0]
     return result
 
@@ -55,7 +66,6 @@ def get_hostname(domain_or_url):
     """
     _tld_name = get_tld(domain_or_url)
     _full_domain_name = get_full_domain(domain_or_url)
-    print _tld_name, _full_domain_name
     result = None
     if _tld_name and _full_domain_name:
         result = _full_domain_name.replace(_tld_name, '')
@@ -74,12 +84,12 @@ def _init_domains_zone():
     global domains_tlds
     with open(os.path.join(root_path, 'effective_tld_names.dat.txt'), 'rb') as fp:
         for line in fp:
-            if line.strip() and not line.startswith('//'):
+            if line.decode('utf-8').strip() and not line.decode('utf-8').startswith('//'):
                 domains_tlds.append(line.strip())
         domains_tlds = set(domains_tlds)
 
 
-def _tld_by_domain(domain, strict):
+def _fld_by_domain(domain, strict):
     """
 
     :param domain:
@@ -87,6 +97,9 @@ def _tld_by_domain(domain, strict):
     :return:
     """
     result = ''
+
+    if ip_check(domain):
+        return domain
 
     if domain.endswith('.'):
         domain = domain[:-1]
@@ -136,13 +149,13 @@ def _tld_by_domain(domain, strict):
     return result
 
 
-def _tld_by_url(url, strict):
+def _fld_by_url(url, strict):
     """
 
     :param url:
     :return:
     """
     domain_name = urlparse.urlparse(url).netloc.split(":", 1)[0]
-    return _tld_by_domain(domain_name, strict)
+    return _fld_by_domain(domain_name, strict)
 
 _init_domains_zone()

@@ -15,19 +15,16 @@ def read(fname):
 
 setup(
     name='pytld',
-    version='0.1.0',
+    version='0.2.0',
     description='Tld is obtained by url or full domain name',
-    long_description=read('README.md'),
+    long_description=read('README'),
     author='MyKings',
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
-        "Environment :: Web Environment",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
-        "Development Status :: 5 - Production/Stable",
-        "Topic :: Internet",
         "License :: OSI Approved :: Mozilla Public License 1.1 (MPL 1.1)",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)",
