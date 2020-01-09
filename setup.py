@@ -17,7 +17,7 @@ setup(
     name='pytld',
     version='0.2.1',
     description='Tld is obtained by url or full domain name',
-    long_description=read('README'),
+    long_description=read('README.md'),
     author='MyKings',
     classifiers=[
         "Programming Language :: Python",
